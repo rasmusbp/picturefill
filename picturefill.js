@@ -28,7 +28,14 @@
 			var picImg = ps[ i ].getElementsByTagName( "img" )[ 0 ];
 
 			if( matches.length ){
-				var matchedEl = matches.pop();
+				var matchedEl = matches.pop(),
+					isMatched = matchedEl.getElementsByTagName( "img" )[ 0 ];
+				
+				// no need to 're-match' image of one such already exist 
+				if ( isMatched ) {
+					continue;
+				}
+				
 				if( !picImg || picImg.parentNode.nodeName === "NOSCRIPT" ){
 					picImg = w.document.createElement( "img" );
 					picImg.alt = ps[ i ].getAttribute( "data-alt" );
